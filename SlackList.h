@@ -7,8 +7,6 @@
 
 #include <Arduino.h>
 
-#include <Arduino.h>
-
 template<class T>
 class SlackList {
     struct Node {
@@ -51,8 +49,18 @@ class SlackList {
 
 public:
     struct SizeArray {
-        T ** Array;
+    public:
         int Size;
+        T Array;
+
+        SizeArray(int size): Size(size), Array(new T[Size]) { }
+    };
+    struct SizeArrayPtr {
+    public:
+        int Size;
+        T ** Array;
+
+        SizeArrayPtr(int size): Size(size) { }
     };
 
     T Get(int num) {
@@ -70,7 +78,6 @@ public:
     }
 
     T * GetPtr(int num) {
-        Log(HeadStart->ID);
         if(Size >= 0 && num >= 0) {
             Node * n = HeadStart;
             while (true) {
@@ -121,18 +128,30 @@ public:
     }
 
     SizeArray GetAll() {
-        T * returnData [Size];
+        SizeArray returnData(Size);
 
         Node * head = HeadStart;
         for(int i = 0; i < Size; i++) {
-            returnData[i] = head->Data;
+            T * obj = head->Data;
+            returnData.Array[i] = *obj;
+            head = head->Next;
+        }
+        return returnData;
+    }
+
+    SizeArrayPtr * GetAllPtr() {
+        SizeArrayPtr * returnData = new SizeArrayPtr(Size);
+        T *returnWert[Size] { };
+
+
+        Node * head = HeadStart;
+        for(int i = 0; i < Size; i++) {
+            returnWert[i] = head->Data;
             head = head->Next;
         }
 
-        SizeArray returnWert;
-        returnWert.Array = returnData;
-        returnWert.Size = Size;
-        return returnWert;
+        returnData->Array = returnWert;
+        return returnData;
     }
 
     int GetSize() { return Size; }
@@ -409,8 +428,19 @@ class SlackListUInt16 {
 
 public:
     struct SizeArray {
-        T ** Array;
+    public:
         uint16_t Size;
+        T Array;
+
+        SizeArray(uint16_t size): Size(size), Array(new T[Size]) { }
+    };
+
+    struct SizeArrayPtr {
+    public:
+        uint16_t Size;
+        T ** Array;
+
+        SizeArrayPtr(uint16_t size): Size(size) { }
     };
 
     T Get(uint16_t num) {
@@ -479,18 +509,30 @@ public:
     }
 
     SizeArray GetAll() {
-        T * returnData [Size];
+        SizeArray returnData(Size);
 
         Node * head = HeadStart;
         for(uint16_t i = 0; i < Size; i++) {
-            returnData[i] = head->Data;
+            T * obj = head->Data;
+            returnData.Array[i] = *obj;
+            head = head->Next;
+        }
+        return returnData;
+    }
+
+    SizeArrayPtr * GetAllPtr() {
+        SizeArrayPtr * returnData = new SizeArrayPtr(Size);
+        T *returnWert[Size] { };
+
+
+        Node * head = HeadStart;
+        for(uint16_t i = 0; i < Size; i++) {
+            returnWert[i] = head->Data;
             head = head->Next;
         }
 
-        SizeArray returnWert;
-        returnWert.Array = returnData;
-        returnWert.Size = Size;
-        return returnWert;
+        returnData->Array = returnWert;
+        return returnData;
     }
 
     uint16_t GetSize() { return Size; }
@@ -770,8 +812,19 @@ class SlackListUInt32 {
 
 public:
     struct SizeArray {
-        T ** Array;
+    public:
         uint32_t Size;
+        T Array;
+
+        SizeArray(uint32_t size): Size(size), Array(new T[Size]) { }
+    };
+
+    struct SizeArrayPtr {
+    public:
+        uint32_t Size;
+        T ** Array;
+
+        SizeArrayPtr(uint32_t size): Size(size) { }
     };
 
     T Get(uint32_t num) {
@@ -840,18 +893,30 @@ public:
     }
 
     SizeArray GetAll() {
-        T * returnData [Size];
+        SizeArray returnData(Size);
 
         Node * head = HeadStart;
         for(uint32_t i = 0; i < Size; i++) {
-            returnData[i] = head->Data;
+            T * obj = head->Data;
+            returnData.Array[i] = *obj;
+            head = head->Next;
+        }
+        return returnData;
+    }
+
+    SizeArrayPtr * GetAllPtr() {
+        SizeArrayPtr * returnData = new SizeArrayPtr(Size);
+        T *returnWert[Size] { };
+
+
+        Node * head = HeadStart;
+        for(uint32_t i = 0; i < Size; i++) {
+            returnWert[i] = head->Data;
             head = head->Next;
         }
 
-        SizeArray returnWert;
-        returnWert.Array = returnData;
-        returnWert.Size = Size;
-        return returnWert;
+        returnData->Array = returnWert;
+        return returnData;
     }
 
     uint32_t GetSize() { return Size; }
