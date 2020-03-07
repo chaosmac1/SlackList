@@ -2,7 +2,11 @@
 
 ### Include the library
 ```c++
+// C++
 #include <SlackList.h>
+
+// Arduino
+#include <SlackListino.h>
 ```
 
 ### Creating a list
