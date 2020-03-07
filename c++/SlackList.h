@@ -5,7 +5,7 @@
 #ifndef EQ_SLACKLIST_H
 #define EQ_SLACKLIST_H
 
-#include <Arduino.h>
+#include <iostream>
 
 template<class T>
 class SlackList {
