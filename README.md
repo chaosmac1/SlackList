@@ -130,7 +130,6 @@ list.PassList([](int &fromList) {
 
 ### Put compare function with input 
 ```c++
-// Version 1
 SlackList<int> list;
 
 for (int i = 1; i < 5; i++) { list.Add(i); }
